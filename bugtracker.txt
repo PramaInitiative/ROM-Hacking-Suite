@@ -1,0 +1,25 @@
+[u][b]BUG TRACKER[/b][/u]
+[u]BUGS OUVERTS[/u]
+Ces bugs sont actuellement présents dans la version en ligne sur le site.
+[hide]
+Apparemment, aucun bug n'a été reporté :hap:
+[/hide]
+
+
+[u]BUGS PATCHÉS[/u]
+Ces bugs étaient présents sur une ancienne version, mais ils ont été corrigés dans la version actuellement en ligne.
+[hide]
+#001 L'instruction jp (hl) n'est pas présente (reporté par Haxel) [Corrigé en 2.1]
+#002 Certaines instructions demandent des arguments alors qu'elles ne devraient pas (reporté par Haxel) [Corrigé en 2.1]
+#003 Certaines instructions ne sont pas ajoutées lors du clic (reporté par Haxel) [Corrigé en 2.0]
+#004 Cela provoque un plantage du compilateur (reporté par Haxel) [Corrigé en 2.0]
+#005 Spammer le bouton "Afficher / Cacher la HEX liste" provoque un bug graphique (reporté par BUGLITCH) [Corrigé en 2.0]
+#006 L'avertissement "Utilisation d'items sans quantité (exemple : Colis de Chen) en plus d'un exemplaire" se déclenche même si la checkbox n'est pas cochée [Corrigé en 2.0]
+#007 L'avertissement "Item présent plusieurs fois" se bloque et reste activé [Corrigé en 2.0]
+#008 Parfois, la compilation ne démarre pas. [Corrigé en 2.1]
+#009 L'option "Tout supprimer" ne fonctionne pas [Corrigé en 2.1]
+#010 Les instructions avec préfixe affichent "PREFIXE" et ne sont pas compilées correctement [Corrigé en 2.1]
+#011 L'instruction "neg", qui n'existe que sur le z80 original, se trouve dans le compilateur et devrait être retirée [Corrigé en 2.1]
+#012 Sous Internet Explorer 9, l'animation de la sidebar plante et boucle indéfiniment. [Corrigé en 2.2]
+#013 Lancer plusieurs fois la compilation sans recharger la page exécute la compilation de multiples fois, et ce simultanément. [Corrigé en 2.2]
+[/hide]

@@ -71,6 +71,7 @@
                                             <div class="form-group">
                                                 <label for="GBptr" id="GBptrDescr" class="control-label">Pointeur GB&nbsp;</label>
                                                 <div class="input-group"><span class="input-group-addon">0x</span><input id="GBptr" type="text" class="form-control" placeholder="3:6291" aria-describedby="GBptrDescr"></div>
+                                                <p class="help-block">NB : si le pointeur n'est pas compris entre 1:4000 et 7F:7FFF, cet outil donnera un r&eacute;sultat faux car ce n'est plus de la ROM !</p>
                                             </div>
                                         </div>
                                         <div class="col-xs-2">
@@ -81,6 +82,7 @@
                                             <div class="form-group">
                                                 <label for="ROMofs" id="ROMofsDescr" class="control-label">Offset ROM&nbsp;</label>
                                                 <div class="input-group"><span class="input-group-addon">0x</span><input id="ROMofs" type="text" class="form-control" placeholder="0E291" aria-describedby="ROMofsDescr"></div>
+                                                <p class="help-block">NB : si le pointeur est sup&eacute;rieur &agrave; 1FFFFF, cet outil donnera un r&eacute;sultat faux car ce n'est plus de la ROM !</p>
                                             </div>
                                         </div>
                                     </div>
@@ -589,76 +591,6 @@
                                         Cha&icirc;ne hexad&eacute;cimale g&eacute;n&eacute;r&eacute;e
                                     </div>
                                     <div class="panel-body" id="hexedStr">
-                                        <!-- Générée via JavaScript -->
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-					<div class="panel panel-default">
-                        <div class="panel-heading" role="tab" id="headingSeven">
-                            <h4 class="panel-title">
-                                <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseSeven" aria-expanded="false" aria-controls="collapseSeven">
-                                    G&eacute;n&eacute;rateur d'Object Data
-                                </a>
-                            </h4>
-                        </div>
-                        <div id="collapseSeven" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingSeven">
-                            <div class="panel-body">
-                                <form class="form-horizontal prevent-submit">
-                                    <div class="form-group">
-                                        <label for="object1" class="col-sm-4 control-label">Blocs bordant la map</label>
-                                        <div class="col-sm-8">
-                                            <input type="text" class="form-control" id="object1" placeholder="00-FF" data-max="256">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="object2" class="col-sm-4 control-label">Donn&eacute;es des warps</label>
-                                        <div class="col-sm-8">
-                                            <textarea class="form-control" id="object3" placeholder="Y_pos X_pos Warp-To Warp-To_Map"></textarea>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="object3" class="col-sm-4 control-label">Donn&eacute;es des panneaux</label>
-                                        <div class="col-sm-8">
-                                            <textarea class="form-control" id="object5" placeholder="0000-FFFF"></textarea>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="object4" class="col-sm-4 control-label">Donn&eacute;es des PNJ "passifs"</label>
-                                        <div class="col-sm-8">
-                                            <textarea class="form-control" id="object9" placeholder="00"></textarea>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="object5" class="col-sm-4 control-label">Donn&eacute;es des Dresseurs</label>
-                                        <div class="col-sm-8">
-                                            <textarea class="form-control" id="object10" placeholder="00"></textarea>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="object6" class="col-sm-4 control-label">Donn&eacute;es des items</label>
-                                        <div class="col-sm-8">
-                                            <textarea class="form-control" id="object11" placeholder="00"></textarea>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="object7" class="col-sm-4 control-label">Donn&eacute;es des "Warp-To"</label>
-                                        <div class="col-sm-8">
-                                            <textarea class="form-control" id="object12" placeholder="00"></textarea>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <div class="col-sm-offset-2 col-sm-8">
-                                            <button type="button" id="generateObject" class="btn btn-primary btn-block">G&eacute;n&eacute;rer l'Object Data</button>
-                                        </div>
-                                    </div>
-                                </form>
-                                <div class="panel panel-primary">
-                                    <div class="panel-heading">
-                                        Cha&icirc;ne hexad&eacute;cimale g&eacute;n&eacute;r&eacute;e
-                                    </div>
-                                    <div class="panel-body" id="objectData">
                                         <!-- Générée via JavaScript -->
                                     </div>
                                 </div>

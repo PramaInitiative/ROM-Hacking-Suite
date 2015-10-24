@@ -228,7 +228,7 @@ Kernel.debug.info('Constructeurs de classe chargés !');
 
 var ptrConversion = {
     parseGBptr: function(GBptr) {
-        return /^[0-9A-F]{1,2}:[0-9A-F]{1,4}$/.test(GBptr);
+        return /^[0-9A-F]{1,2}:[0-9A-F]{4}$/.test(GBptr);
     },
     parseROMofs: function(ROMofs) {
         return /^[0-9A-F]{1,6}$/.test(ROMofs);
@@ -239,23 +239,17 @@ var ptrConversion = {
             if(ptrConversion.parseGBptr(ptr)) {
                 ptr = ptr.split(':');
                 ptr = [/* Banque */ hexToDec(ptr[0]) - 1, /* Pointeur interne */ hexToDec(ptr[1])];
-                if(ptr[0] === -1) { // Banque 0, c'est particulier
-                    if(ptr[1] < 16384) {
-                        $('#ROMofs').val(decToHex(ptr[1], 5));
-                    } else {
-                        Kernel.debug.raise('Le pointeur doit être compris entre 0000 et 3FFF !');
-                    }
-                } else if (ptr[0] < 127) { // On ne peut être qu'au maximum sur la banque 7F (127)
+                if(ptr[0] < 127) {
                     if(ptr[1] < 32768 && ptr[1] > 16383) {
                         $('#ROMofs').val(decToHex(ptr[0] * 16384 + ptr[1], 5));
                     } else {
                         Kernel.debug.raise('Le pointeur être compris entre 4000 et 7FFF !');
                     }
                 } else {
-                    Kernel.debug.raise('L\'ID de banque ne doit pas valoir plus de 7F !');
+                    Kernel.debug.raise('L\'ID de banque ne doit pas valoir 7F !');
                 }
             } else {
-                Kernel.debug.raise('Veuillez entrer un pointeur compris entre 00:0000 et 7F:7FFF !');
+                Kernel.debug.raise('Veuillez entrer un pointeur compris entre 01-4000 et 7F-7FFF !');
             }
         });
         $('#parseROMofs').click(function() {
@@ -264,10 +258,7 @@ var ptrConversion = {
                 ptr = hexToDec(ptr);
                 if(ptr < 2097152) {
                     ptr = [/* Banque */ Math.floor(ptr / 16384), /* Pointeur interne */ ptr % 16384 + 16384];
-                    if(ptr[0] === 0) {
-                        ptr[1] -= 16384;
-                    }
-                    $('#GBptr').val(decToHex(ptr[0], 2) + ':' + decToHex(ptr[1], 4));
+                    $('#GBptr').val(decToHex(ptr[0]) + ':' + decToHex(ptr[1]));
                 } else {
                     Kernel.debug.raise('L\'offset ne doit pas dépasser 1FFFFF !');
                 }
@@ -379,36 +370,15 @@ var ptrConversion = {
                       '(', ')', ':', ';', '[', ']',
                       'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z',
                       'à', 'è', 'é', 'ù', 'ß', 'ç', 'Ö', 'Ü', 'ä', 'ö', 'ü', 'ë', 'ï', 'â', 'ô', 'û', 'ê', 'î',
-                      '\'', '-', '+', '?', '!', '.', '$', '*', '/', ',',
+                      '\'', '-', '+', '?', '!', '.', '*', '/', ',',
                       '0', '1', '2', '3', '4', '5', '6', '7', '8', '9'],
             indexes: ['7F', '80', '81', '82', '83', '84', '85', '86', '87', '88', '89', '8A', '8B', '8C', '8D', '8E', '8F', '90', '91', '92', '93', '94', '95', '96', '97', '98', '99',
                       '9A', '9B', '9C', '9D', '9E', '9F',
                       'A0', 'A1', 'A2', 'A3', 'A4', 'A5', 'A6', 'A7', 'A8', 'A9', 'AA', 'AB', 'AC', 'AD', 'AE', 'AF', 'B0', 'B1', 'B2', 'B3', 'B4', 'B5', 'B6', 'B7', 'B8', 'B9',
                       'BA', 'BB', 'BC', 'BD', 'BE', 'BF', 'C1', 'C2', 'C3', 'C4', 'C5', 'C6', 'C7', 'C8', 'C9', 'CA', 'CB', 'CC',
-                      'E0', 'E3', 'E4', 'E6', 'E7', 'E8', 'F0', 'F1', 'F3', 'F4',
+                      'E0', 'E3', 'E4', 'E6', 'E7', 'E8', 'F1', 'F3', 'F4',
                       'F6', 'F7', 'F8', 'F9', 'FA', 'FB', 'FC', 'FD', 'FE', 'FF']
-        }, specialChars: [
-            {ida: '54', chars: 'POKé'},
-            {ida: '5B', chars: 'PC'},
-            {ida: '5C', chars: 'CT'},
-            {ida: '5D', chars: 'DRES.'},
-            {ida: '5E', chars: 'ROCKET'},
-            {ida: '75', chars: '...'},
-            {ida: 'D4', chars: 'c\''},
-            {ida: 'D5', chars: 'd\''},
-            {ida: 'D6', chars: 'j\''},
-            {ida: 'D7', chars: 'l\''},
-            {ida: 'D8', chars: 'm\''},
-            {ida: 'D9', chars: 'n\''},
-            {ida: 'DA', chars: 'p\''},
-            {ida: 'DB', chars: 's\''},
-            {ida: 'DC', chars: '\'s'},
-            {ida: 'DD', chars: 't\''},
-            {ida: 'DE', chars: 'u\''},
-            {ida: 'DF', chars: 'y\''},
-            {ida: 'E1', chars: 'PK'},
-            {ida: 'E2', chars: 'MN'}
-        ]
+        }
     }, init: function() {
         $('#strToHex').click(function() {
             var inputs = $('#str').val().split('\n'), hexedStr = '';
@@ -425,39 +395,19 @@ var ptrConversion = {
                     return;
                 }
                 me = me.slice(6); // On enlève le préfixe, l'espace et le premier guillemet.
-                if(!/^[ A-Z():;\[\]a-zàèéùßçÖÜäöüëïâôûî'+?!.$*\/,0-9-]+"$/.test(me)) { // On vérifie qu'après nous, il n'y a que les caractères acceptés et un " pour terminer.
+                if(!/^[ A-Z():;\[\]a-zàèéùßçÖÜäöüëïâôûî'+?!.*\/,0-9-]+"$/.test(me)) { // On vérifie qu'après nous, il n'y a que les caractères acceptés et un " pour terminer.
                     Kernel.debug.raise('Ligne ' + (index + 1) + ' invalide !\nSeuls les caractères suivants sont acceptés :\nABCDEFGHIJKLMNOPQRSTUVWXYZ\nabcdefghijklmnopqrstuvwxyz\nàèéùßçÖÜäöüëïâôûî\n():; []\'+-?!.*\/,\n0123456789\n\nDe plus, une seule commande de texte par ligne est acceptée !');
                 }
-                if(me.length > 19) {
-                    Kernel.debug.raise('Ligne ' + (index+1) + ' invalide !\nIl ne peut pas y avoir plus de 12 caractères\npar ligne !');
-                }
                 while(me !== '"') { // Tant qu'il reste des caractères à parser,
-                    i = '';
-                    strConverter.conversions.specialChars.forEach(function(current) {
-                        if(me.startsWith(current.chars)) {
-                            i = current;
-                        }
-                    });
-                    if(i === '') {
-                        i = strConverter.conversions.chars.chars.indexOf(me.charAt(0)); // On cherche le caractère actuel,
-                        hexedStr += ' ' + strConverter.conversions.chars.indexes[i]; // On le parse,
-                        me = me.slice(1); // Et on le vire.
-                    } else {
-                        hexedStr += ' ' + i.ida;
-                        me = me.slice(i.chars.length);
+                    i = 0;
+                    while(strConverter.conversions.chars.chars[i] !== me.charAt(0)) { // On cherche le caractère actuel,
+                        i++;
                     }
+                    hexedStr += ' ' + strConverter.conversions.chars.indexes[i]; // On le parse,
+                    me = me.slice(1); // Et on le vire.
                 }
             });
             $('#hexedStr').text(hexedStr); // Résultat final !
-        });
-    }
-},objectDataGenerator = {
-    eventDisplacement: function(largeur, Y, X) { // EVENT_DISP largeur, Y, X
-        return 50927 + (largeur + 6) * Y + largeur + X; // Vérifier la formule
-    }, init: function() {
-        $('#generateObject').click(function() {
-            var finalStr = '';
-            
         });
     }
 };
@@ -502,23 +452,6 @@ $(window).load(function() { // Une fois que le DOM est chargé,
 
     // String converter
     strConverter.init();
-
-    // Konami Code. Si vous ne connaissez pas, vous êtes indigne de ce code !
-    var kkeys = [], konami = "38,38,40,40,37,39,37,39,66,65";
-    $(window).keydown(function(e) {
-        kkeys.push(e.keyCode);
-        if (kkeys.toString().indexOf(konami) >= 0) {
-            alert('Vous utilisez Mega Canne !');
-            alert('Ca mord !');
-            alert('Un MISSINGNO. sauvage apparaît !');
-            kkeys = '';
-            while(kkeys.length < 12) {
-                kkeys += String.fromCharCode(Math.floor(Math.rand() * 100));
-            }
-            alert(kkeys);
-            kkeys = [];
-        }
-    });
 
 
     Kernel.debug.info('Le script est totalement chargé et initialisé. Bonne utilisation !');

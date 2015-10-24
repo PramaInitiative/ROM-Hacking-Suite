@@ -1,0 +1,46 @@
+[b]CHANGELOG version 1.0[/b] [i]"ENFIN !"[/i]
+[hide]
+[u][b]Build Date[/b] : 10/10/2015[/u]
+
+NOUVEAU :
+[list]
+[*]Plusieurs outils pratiques :
+
+[/list]
+
+MODIFIÉ :
+[list]
+[*]Optimisation du moteur de conversion de texte
+[*]Ajout de deux instructions oubliées :P
+[*]Réorganisation d'une partie des instructions.
+[*]Le déroulement de la table d'items (qui n'existe pas sur téléphone) a été accéléré.
+[/list]
+
+BUGFIX :
+[list]
+[*]Un bug graphique lié au spam du bouton "Cacher/Afficher la HEX liste" a été patché. (#005)
+[*]Un bug lié au déclenchement intempestif de l'avertissement "Items présent plusieurs fois" a été patché. (#007)
+[*]Un bug faisait que l'avertissement "Utilisation d'items sans quantité..." se déclenchait même s'il était désactivé. (#006)
+[*]Tenter d'ajouter certaines instructions ne fonctionnait pas et faisait planter le compilateur. (#003 et #004)
+[/list]
+[/hide]
+
+[b]CHANGELOG version A.B[/b] [i]"NOM DE LA RELEASE"[/i]
+[hide]
+[u][b]Build date[/b] : ??/??/20??[/u]
+
+NOUVEAU :
+[list]
+[*]Rien pour cette version ! Revenez plus tard !
+[/list]
+
+MODIFIÉ :
+[list]
+[*]Rien pour cette version ! Revenez plus tard !
+[/list]
+
+BUGFIX :
+[list]
+[*]Rien à fixer. Donc c'est bien :)
+[/list]
+[/hide]
